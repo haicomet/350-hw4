@@ -16,30 +16,51 @@ public class Deck
         {
             foreach (Rank rank in Enum.GetValues(typeof(Rank)))
             {
-                //create a new card and add it to the deck
+                cards.Add(new Card(suit, rank));
             }
         }
     }
 
     //Implement a property to get Cards
-    
+    public List<Card> Cards
+    {
+        get { return cards; }
+    }
+
 
     //Takes top card from deck (if deck is not empty, otherwise return null)
     public Card TakeTopCard()
     {
         //implementation
+        if (cards.Count == 0) throw new InvalidOperationException("Deck is empty!");
+        Card topCard = cards[0];
+        cards.RemoveAt(0);
+        return topCard;
     }
 
     //Shuffle Method
     public void Shuffle()
     {
         //implementation
+        Random rand = new Random();
+        int n = cards.Count;
+        for (int i = 0; i < n; i++)
+        {
+            int j = rand.Next(i, n);
+            Card temp = cards[i];
+            cards[i] = cards[j];
+            cards[j] = temp;
+        }
     }
 
     //Cut method
     public void Cut(int index)
     {
         //implementation
+        if (index < 0 || index >= cards.Count) return;
+        List<Card> top = cards.Take(index).ToList();
+        List<Card> bottom = cards.Skip(index).ToList();
+        cards = bottom.Concat(top).ToList();
     }
 }
 
