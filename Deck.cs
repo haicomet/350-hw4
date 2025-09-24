@@ -62,5 +62,18 @@ public class Deck
         List<Card> bottom = cards.Skip(index).ToList();
         cards = bottom.Concat(top).ToList();
     }
-}
 
+
+    public void Print()
+    {
+        foreach (var card in cards)
+        {
+            Console.WriteLine($"{card.Rank} of {card.Suit}");
+        }
+    }
+
+    public bool IsEmpty()
+    {
+        return cards.Count == 0;
+    }
+}
