@@ -72,8 +72,8 @@ public class Deck
         }
     }
 
-    public bool IsEmpty()
+    public bool IsEmpty
     {
-        return cards.Count == 0;
+        get { return cards.Count == 0; }
     }
 }
